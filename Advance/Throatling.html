@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throatling</title>
+</head>
+
+<body>
+
+    <div>
+        <button id="btn">FIRE</button>
+        <div id="display"></div>
+    </div>
+
+    <script>
+        let btn = document.getElementById('btn')   //  fixed id
+        let divTag = document.getElementById('display')   //  fixed id
+        let c = 0
+        function fire() {
+            console.log(`FIRE = ${++c}`);
+        }
+         divTag.innerText = c;
+
+        //  Debounce function
+        function goodFn(fn, t) {
+            let id = null;
+            return function () {
+                if (!id) {
+                    fn();
+                    id = setTimeout(() => {
+                        id = null
+                    }, t)
+                }
+            }
+        }
+
+        let ThroatlFn = goodFn(fire, 3000);
+        btn.addEventListener('click', ThroatlFn); //  fixed event
+    </script>
+</body>
+
+</html>

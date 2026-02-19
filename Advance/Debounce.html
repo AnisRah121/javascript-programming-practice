@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debounce</title>
+</head>
+<body>
+
+    <div>
+        <input type="text" id="inp" />
+        <div id="display"></div>
+    </div>
+
+    <script>
+        let inpTag = document.getElementById('inp')   //  fixed id
+        let divTag = document.getElementById('display')
+
+        let c = 0
+        function expensive() {
+            c++
+            for (let i = 1; i <= 100000000; i++) {
+
+            }
+            divTag.innerText = c;
+        }
+
+        //  Debounce function
+        function goodFn(fn, t) {
+            let id;
+            return function () {
+                clearTimeout(id);
+                id = setTimeout(() => {
+                    fn();
+                }, t);
+            }
+        }
+
+        let debounceFn = goodFn(expensive, 2000);
+        inpTag.addEventListener('input', debounceFn); //  fixed event
+    </script>
+</body>
+</html>
